@@ -1,1 +1,89 @@
-test1
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <link>
+      <title>JavaScript課題②</title>
+      <link rel="stylesheet" href="css/styles.css">
+      <style>
+          ul {
+          float: left;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+  </head>
+  <body>
+    <h1>FizzBuzz問題</h1>
+        <p>FizzNum ：<input type="text" id="fizzInput" value="" placeholder="整数値を入力してください" size="22"></p>
+        <p>BuzzNum：<input type="text" id="buzzInput" value="" placeholder="整数値を入力してください" size="22"> </p>
+         <button id="btn">実行</button>
+         <p>【 出 力 】</p>
+         <div id="Parent">
+          </div>
+         <ul id="parent">
+           <li></li>
+         </ul>
+      <script>
+      'use strict'
+{
+// btnと言うタグをhtmlの中で探す
+const btn = document.getElementById('btn');
+// ボタンをクリックするとfunction以下の処理を行う
+// btn.addEventListener('click',function() {  アロー関数を使用
+btn.addEventListener('click',()=> {
+
+    var element = document.getElementById('parent');  //ulの要素を取得
+    while(element.firstChild){    //ulの子要素を削除しつづける
+      element.removeChild(element.firstChild);
+    }
+    var element = document.getElementById('Parent'); //divの要素を取得
+    while(element.firstChild){   //divの子要素を削除しつづける
+      element.removeChild(element.firstChild);
+    }
+    const fizzForm = document.getElementById('fizzInput').value;
+    const buzzForm = document.getElementById('buzzInput').value;
+
+// inputタグの内容が空白か確認し、空白なら整数値を入力するように知らせる
+    if(fizzForm === "" || buzzForm === "" ) {
+        let Etext = "整数値を入力してください！";
+        // document.getElementById('Mtext').textContent = Etext ;
+        let Text = document.createElement('div'); 
+        let div = document.querySelector('div');
+        Text.textContent = Etext;
+        div.appendChild(Text);
+    } else {  
+      // 入力された値を数値に変換する
+    const fizzNum = parseFloat(fizzForm);
+    const buzzNum = parseFloat(buzzForm);
+    // 入力された内容が整数であるか調べて、整数なら計算を行う（途中）
+    // 計算した後、小さい数字から出力してく
+    if ( Number.isInteger(fizzNum) && Number.isInteger(buzzNum))  {
+         for(let i = 1; i < 100; i++) {
+          let item = document.createElement('li'); 
+          let ul = document.querySelector('ul');
+          if (i % fizzNum === 0 && i % buzzNum !== 0){
+            item.textContent = ('Fizz' + " " + i);
+             ul.appendChild(item);
+          } else if (i % fizzNum !== 0 && i % buzzNum === 0) {
+          item.textContent = ('Buzz' + " " + i );
+          ul.appendChild(item);
+          } else if (i % fizzNum === 0 && i % buzzNum === 0){
+            item.textContent = ('FizzBuzz' + " " + i );
+          ul.appendChild(item);
+          }
+        }
+      }else {
+         let Etext = "整数値を入力してください！";
+        let Text = document.createElement('div'); 
+        let div = document.querySelector('div');
+        Text.textContent = Etext;
+        div.appendChild(Text);
+           } 
+    }
+  }
+  
+)}
+      </script>
+</body>
+</html>
